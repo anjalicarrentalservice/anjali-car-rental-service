@@ -19,10 +19,35 @@ HEADER
 const menuToggle = document.getElementById("menuToggle");
 const navbar = document.getElementById("navbar");
 
-menuToggle.addEventListener("click",()=>{
+menuToggle.addEventListener("click", () => {
 
-navbar.classList.toggle("active");
-    
+    navbar.classList.toggle("active");
+
+    const isExpanded =
+        menuToggle.getAttribute("aria-expanded") === "true";
+
+    menuToggle.setAttribute(
+        "aria-expanded",
+        (!isExpanded).toString()
+    );
+
+});
+
+const navLinks = navbar.querySelectorAll("a");
+
+navLinks.forEach((link) => {
+
+    link.addEventListener("click", () => {
+
+        navbar.classList.remove("active");
+
+        menuToggle.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+    });
+
 });
 
 window.addEventListener("scroll",()=>{
